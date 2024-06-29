@@ -4,6 +4,12 @@
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
+        <style name="CustomTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+            <!-- Box stroke color -->
+            <item name="boxStrokeColor">@color/myColor</item>
+            <!-- Hint text color when the field is focused -->
+            <item name="hintTextColor">@color/black</item>
+        </style>
 
     <style name="Theme.MADProjectML" parent="Base.Theme.MADProjectML" />
 </resources>
