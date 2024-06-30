@@ -1,98 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/white"
-    tools:context=".LoginFrag">
-
+    android:padding="20dp"
+   android:background="@color/white"
+    tools:context=".Frags.LoginFrag">
 
     <ImageView
-        android:layout_width="200dp"
+        android:layout_width="180dp"
         android:layout_height="100dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="100dp"
-        android:src="@drawable/classifect_logo" />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/classifect_logo"
+        android:contentDescription="Logo" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="30dp"
         android:gravity="center"
         android:text="Login"
-        android:layout_marginBottom="40dp"
         android:textSize="24sp"
-        android:textStyle="bold" />
-
+        android:textStyle="bold"
+        android:textColor="@color/black" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp">
+        android:layout_marginBottom="20dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:hint="Enter email" />
-
-
+            android:hint="Email"
+            android:inputType="textEmailAddress" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp">
+        android:layout_marginBottom="20dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Password"
-            android:inputType="textPassword"
-            android:layout_marginBottom="10dp"/>
-
-
+            android:hint="Password"
+            android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"
-        >
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnLogin"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginEnd="5dp"
-            android:textColor="@color/white"
             android:text="Login"
-           android:backgroundTint="@color/myColor"
-            android:id="@+id/btnLogin"/>
+            android:textColor="@color/white" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnCancel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:backgroundTint="@color/myColor"
-            android:textColor="@color/white"
+            android:layout_marginStart="5dp"
             android:text="Cancel"
-            android:id="@+id/btnCancel"
-            />
+            android:textColor="@color/white" />
     </LinearLayout>
 
     <TextView
+        android:id="@+id/tvSignUp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="New User?"
-        android:gravity="end"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"
-        android:id="@+id/tvSignUp"
-        />
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:text="New User? Sign Up"
+        android:textColor="@color/myColor"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="16sp"/>
 </LinearLayout>

@@ -15,25 +15,39 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class SplashScreen extends AppCompatActivity {
     ImageView ivLogo;
     TextView tvSlogan;
     Animation logoAnim, sloganAnim;
     private static int SPLASH_TIMEOUT = 3000; // 3 seconds
 
+    private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_splash_screen);
-init();
+
+        init();
 
         ivLogo.setAnimation(logoAnim);
         tvSlogan.setAnimation(sloganAnim);
 
         new Handler().postDelayed(() -> {
-            Intent intent = new Intent(SplashScreen.this, MainActivity.class);
-            startActivity(intent);
+            FirebaseUser currentUser = mAuth.getCurrentUser();
+            if (currentUser != null) {
+                // User is signed in, navigate to Home activity
+                Intent intent = new Intent(SplashScreen.this, Home.class);
+                startActivity(intent);
+            } else {
+                // No user is signed in, navigate to MainActivity
+                Intent intent = new Intent(SplashScreen.this, MainActivity.class);
+                startActivity(intent);
+            }
             finish();
         }, SPLASH_TIMEOUT);
     }
@@ -43,6 +57,6 @@ init();
         tvSlogan = findViewById(R.id.tvSlogan);
         logoAnim = AnimationUtils.loadAnimation(this, R.anim.logo_anim);
         sloganAnim = AnimationUtils.loadAnimation(this, R.anim.slogan_anim);
-
+        mAuth = FirebaseAuth.getInstance();
     }
 }

@@ -11,7 +11,7 @@
     <fragment
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        class="com.example.madprojectml.LoginFrag"
+        class="com.example.madprojectml.Frags.LoginFrag"
         tools:layout="@layout/fragment_login"
         android:id="@+id/fragLogin"/>
 
@@ -19,7 +19,7 @@
     <fragment
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        class="com.example.madprojectml.SignupFrag"
+        class="com.example.madprojectml.Frags.SignupFrag"
         tools:layout="@layout/fragment_signup"
         android:id="@+id/fragSignUp"/>
 
