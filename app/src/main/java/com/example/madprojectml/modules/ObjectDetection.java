@@ -25,29 +25,31 @@ import java.util.List;
 
 public class ObjectDetection extends AppCompatActivity {
 
-    private RecyclerView recyclerViewImages;
-    private FloatingActionButton fabAddImage;
+    private DatabaseReference databaseReference;
     private List<ImageData> imageDataList;
     private ImageAdapter imageAdapter;
-    private DatabaseReference databaseReference;
+    private FloatingActionButton fabAddImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_object_detection);
 
-        recyclerViewImages = findViewById(R.id.recyclerViewImages);
-        fabAddImage = findViewById(R.id.fabAddImage);
-        databaseReference = FirebaseDatabase.getInstance().getReference("object_images");
-
-        recyclerViewImages.setLayoutManager(new LinearLayoutManager(this));
         imageDataList = new ArrayList<>();
-        imageAdapter = new ImageAdapter(this, imageDataList);
-        recyclerViewImages.setAdapter(imageAdapter);
+        fabAddImage = findViewById(R.id.fabAddImage);
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("object_detection_images");
 
         fabAddImage.setOnClickListener(v -> openImageSelectionForm());
 
+        initializeRecyclerView();
         loadImagesFromFirebase();
+    }
+
+    private void openImageSelectionForm() {
+        Intent intent = new Intent(this, ImageSelectionActivity.class);
+        intent.putExtra("MODULE_TYPE", "ObjectDetection");
+        startActivity(intent);
     }
 
     private void loadImagesFromFirebase() {
@@ -69,8 +71,10 @@ public class ObjectDetection extends AppCompatActivity {
         });
     }
 
-    private void openImageSelectionForm() {
-        Intent intent = new Intent(this, ImageSelectionActivity.class);
-        startActivity(intent);
+    private void initializeRecyclerView() {
+        RecyclerView recyclerView = findViewById(R.id.recyclerViewImages);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        imageAdapter = new ImageAdapter(this, imageDataList, "ObjectDetection");
+        recyclerView.setAdapter(imageAdapter);
     }
 }

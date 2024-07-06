@@ -131,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
     private void updateUI(FirebaseUser user) {
         // Navigate to home screen or update the UI with user info
     }
+
     private void init() {
         mAuth = FirebaseAuth.getInstance();
         manager = getSupportFragmentManager();

@@ -25,10 +25,25 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
     private List<ImageData> imageDataList;
     private DatabaseReference databaseReference;
 
-    public ImageAdapter(Context context, List<ImageData> imageDataList) {
+    public ImageAdapter(Context context, List<ImageData> imageDataList, String moduleType) {
         this.context = context;
         this.imageDataList = imageDataList;
-        this.databaseReference = FirebaseDatabase.getInstance().getReference("object_images");
+        switch (moduleType) {
+            case "ImageClassification":
+                this.databaseReference = FirebaseDatabase.getInstance().getReference("image_classification_images");
+                break;
+            case "FlowerClassification":
+                this.databaseReference = FirebaseDatabase.getInstance().getReference("flower_classification_images");
+                break;
+            case "ObjectDetection":
+                this.databaseReference = FirebaseDatabase.getInstance().getReference("object_detection_images");
+                break;
+            case "FaceDetection":
+                this.databaseReference = FirebaseDatabase.getInstance().getReference("face_detection_images");
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid module type");
+        }
     }
 
     @NonNull
@@ -45,12 +60,9 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
         Glide.with(context).load(imageData.getImageUrl()).into(holder.imageView);
 
         // Example of deleting an image (long press)
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                deleteImage(imageData.getImageUrl());
-                return true;
-            }
+        holder.itemView.setOnLongClickListener(v -> {
+            deleteImage(imageData.getImageUrl());
+            return true;
         });
     }
 

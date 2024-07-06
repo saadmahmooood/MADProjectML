@@ -30,6 +30,7 @@ public class ImageSelectionActivity extends AppCompatActivity {
     private Uri imageUri;
     private StorageReference storageReference;
     private DatabaseReference databaseReference;
+    private String moduleType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +39,30 @@ public class ImageSelectionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_image_selection);
 
         imageViewSelected = findViewById(R.id.imageViewSelected);
-        storageReference = FirebaseStorage.getInstance().getReference("images");
-        databaseReference = FirebaseDatabase.getInstance().getReference("images");
+
+        Intent intent = getIntent();
+        moduleType = intent.getStringExtra("MODULE_TYPE");
+
+        switch (moduleType) {
+            case "ImageClassification":
+                storageReference = FirebaseStorage.getInstance().getReference("image_classification_images");
+                databaseReference = FirebaseDatabase.getInstance().getReference("image_classification_images");
+                break;
+            case "FlowerClassification":
+                storageReference = FirebaseStorage.getInstance().getReference("flower_classification_images");
+                databaseReference = FirebaseDatabase.getInstance().getReference("flower_classification_images");
+                break;
+            case "ObjectDetection":
+                storageReference = FirebaseStorage.getInstance().getReference("object_detection_images");
+                databaseReference = FirebaseDatabase.getInstance().getReference("object_detection_images");
+                break;
+            case "FaceDetection":
+                storageReference = FirebaseStorage.getInstance().getReference("face_detection_images");
+                databaseReference = FirebaseDatabase.getInstance().getReference("face_detection_images");
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid module type");
+        }
 
         findViewById(R.id.buttonSelectImage).setOnClickListener(v -> openFileChooser());
         findViewById(R.id.buttonOpenCamera).setOnClickListener(v -> openCamera());
